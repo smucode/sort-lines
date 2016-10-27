@@ -18,6 +18,9 @@ module.exports =
       'sort-lines:natural': ->
         editor = atom.workspace.getActiveTextEditor()
         sortLinesNatural(editor)
+      'sort-lines:pyramid': ->
+        editor = atom.workspace.getActiveTextEditor()
+        sortLinesPyramid(editor)
 
 sortTextLines = (editor, sorter) ->
   sortableRanges = RangeFinder.rangesFor(editor)
@@ -53,3 +56,7 @@ sortLinesNatural = (editor) ->
       return (if aLeadingNum < bLeadingNum then -1 else 1) if aLeadingNum isnt bLeadingNum
       return (if aTrailingNum < bTrailingNum then -1 else 1) if aTrailingNum isnt bTrailingNum
       return 0
+
+sortLinesPyramid = (editor) ->
+  sortTextLines editor, (textLines) ->
+    textLines.sort (a, b) -> a.length === b.length ? a.localeCompare(b) : a.length - b.length
