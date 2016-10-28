@@ -59,4 +59,4 @@ sortLinesNatural = (editor) ->
 
 sortLinesPyramid = (editor) ->
   sortTextLines editor, (textLines) ->
-    textLines.sort (a, b) -> a.length === b.length ? a.localeCompare(b) : a.length - b.length
+    textLines.sort (a, b) -> if a.length is b.length then a.localeCompare(b) else a.length - b.length
